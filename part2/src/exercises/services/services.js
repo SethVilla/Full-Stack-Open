@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const basePhoneBookUrl = "http://localhost:3000/api/persons"
+const basePhoneBookUrl = "/api/persons"
 
 export const getPhoneBookInfo = async (newPerson) => {
     const res = await axios.post(basePhoneBookUrl, newPerson)

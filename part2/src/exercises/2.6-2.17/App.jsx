@@ -16,7 +16,7 @@ export const App = () => {
     })
 
     useEffect(() => {
-       axios.get('http://localhost:3000/api/persons').then(res =>
+       axios.get('/api/persons').then(res =>
        {
            setPersons(res.data)
            setFilteredPersons(res.data)

@@ -32,7 +32,7 @@ entrySchema.set('toJSON', {
     }
 })
 
-const Entry = mongoose.model('Entry', entrySchema)
+const Entry = mongoose.model('Person', entrySchema)
 
 if (argLength === 3) {
     Entry.find({}).then(result => {
