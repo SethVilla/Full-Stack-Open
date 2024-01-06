@@ -18,6 +18,11 @@ export const updatePerson = async (newPerson) => {
     return res.data
 }
 
+export const findPersonById = async (id) => {
+  const res =  await axios.get(`${basePhoneBookUrl}/${id}`)
+    return res.data
+}
+
 export const deletePerson = async (id) => {
     try {
         const res = await axios.delete(`${basePhoneBookUrl}/${id}`)
