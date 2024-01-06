@@ -33,11 +33,8 @@ app.use(express.json())
 app.use(express.urlencoded());
 morgan.token('body', function (req, res) {return Object.keys(req.body).length > 0 ? JSON.stringify(req.body) : ""})
 app.use(morgan(":method :url :status :res[content-length] - :response-time ms :body"))
+app.use(express.static('dist'))
 
-
-app.get("/", (req, res) => {
-    res.send("Hello World")
-})
 
 app.get("/api/persons", (req,res) => {
     res.json(mockData)
