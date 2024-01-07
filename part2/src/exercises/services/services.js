@@ -9,8 +9,17 @@ export const getPhoneBookInfo = async (newPerson) => {
 
 
 export const addNewPerson = async (newPerson) => {
-    const res = await axios.post(basePhoneBookUrl, newPerson)
-    return res.data
+    try {
+        const res = await axios.post(basePhoneBookUrl, newPerson)
+        res.success = true
+        return res.data
+    } catch (e) {
+        console.log(e)
+        return {
+            success: false,
+            error: e.response.data.error
+        }
+    }
 }
 
 export const updatePerson = async (newPerson) => {

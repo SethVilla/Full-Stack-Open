@@ -45,7 +45,7 @@ export const App = () => {
             }
         } else {
             const res = await addNewPerson(newPerson)
-            if (res) {
+            if (res.success) {
                 const newPersons = [...persons, res]
                 setPersons(newPersons)
                 setNotification({type: "success", message: `Added ${res.name}`})
@@ -58,6 +58,11 @@ export const App = () => {
                 } else {
                     setFilteredPersons(newPersons)
                 }
+            } else {
+                setNotification({type: "error", message: `Error ${res.error}`})
+                setTimeout(() => {
+                    setNotification({type: "", message: null})
+                }, 3000)
             }
             }
     }
