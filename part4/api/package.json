@@ -8,6 +8,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
     "mongodb": "^6.3.0",
     "mongoose": "7.6.5"
   },
@@ -28,6 +29,7 @@
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "globalTeardown": "./tests/teardown.js"
   }
 }
