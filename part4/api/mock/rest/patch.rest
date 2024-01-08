@@ -1,0 +1,11 @@
+PATCH http://localhost:9000/api/blog/659aeebcb86e7b6aee26a77f
+Content-Type: application/json
+
+{
+  "blog": {
+    "title": "OTWS updated",
+    "author": "Seth Villa",
+    "url": "lol",
+    "likes": 13
+  }
+}
