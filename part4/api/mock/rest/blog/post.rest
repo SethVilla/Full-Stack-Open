@@ -7,5 +7,8 @@ Content-Type: application/json
     "author": "Seth Villa",
     "url": "lol",
     "likes": 13
+  },
+  "user": {
+    "id": "659c58c744e68498028130bc"
   }
 }
