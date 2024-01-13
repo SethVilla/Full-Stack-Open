@@ -3,7 +3,7 @@ import {User} from "../../models/users.js";
 import {CustomError} from "../../utils/CustomError.js";
 
 export const getAllBlogs = async () => {
-    return Blog.find({}).populate('user', { username: 1, name: 1 })
+    return Blog.find({}).populate('user', { username: 1, name: 1 }).sort({ likes: -1 })
 }
 
 export const getBlogById = async (id) => {
@@ -39,5 +39,7 @@ export const deleteBlog = async (id, userId) => {
 }
 
 export const updateBlog = async (id, blog) => {
-    return Blog.findByIdAndUpdate(id, blog, { new: true })
+    return Blog.findByIdAndUpdate(id, {
+        $set: blog
+    }, { new: true })
 }

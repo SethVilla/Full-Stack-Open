@@ -22,6 +22,7 @@ blogsRouter.post('/', async (req, res) => {
 })
 
 blogsRouter.delete('/:id', async (req, res, next) => {
+    console.log(req.user)
     res.status(200).json(await deleteBlog(req.params.id, req.user.id))
 })
 

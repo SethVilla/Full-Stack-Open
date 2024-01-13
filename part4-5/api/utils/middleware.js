@@ -13,6 +13,7 @@ export const requestLogger = (request, response, next) => {
 
 export const extractAndVerifyToken = async (request, response, next) => {
     const authorization = request.get('authorization');
+    console.log(authorization)
     if (authorization && authorization.startsWith('Bearer ')) {
         const token = authorization?.replace('Bearer ', '');
         const decodedToken = jwt.verify(token, process.env.SECRET);
