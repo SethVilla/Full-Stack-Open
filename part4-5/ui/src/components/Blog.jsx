@@ -32,7 +32,7 @@ export const Blog = ({ blog, onNotification, refreshBlogs }) => {
         }
     }
 
-    return <div style={blogStyle}>
+    return <div className="blog" style={blogStyle}>
             <p>{blog.title} {blog.author}</p>
             <button onClick={() => setShowDetails(!showDetails)}>{showDetails ? 'hide' : 'view'}</button>
             {showDetails && <>
@@ -49,14 +49,21 @@ export const Blog = ({ blog, onNotification, refreshBlogs }) => {
 }
 
 Blog.propTypes = {
-    author: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    likes: PropTypes.number.isRequired,
-    url: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
-    }).isRequired
+    blog: PropTypes.shape(
+        {
+            author: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+            likes: PropTypes.number.isRequired,
+            url: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            user: PropTypes.shape({
+                username: PropTypes.string.isRequired,
+                name: PropTypes.string.isRequired,
+                id: PropTypes.string.isRequired,
+            }).isRequired
+        }
+    ),
+    onLike: PropTypes.func.isRequired,
+    onRemove: PropTypes.func.isRequired,
+    onNotification: PropTypes.func.isRequired
 }
