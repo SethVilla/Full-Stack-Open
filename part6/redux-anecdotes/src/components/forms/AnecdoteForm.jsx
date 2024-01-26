@@ -1,8 +1,7 @@
 import {createAnecdote} from "../../reducers/anecdoteReducer.js";
-import {useDispatch} from "react-redux";
+import {useDispatch} from 'react-redux';
 
 export const AnecdoteForm = () => {
-
     const dispatch = useDispatch()
 
     const onCreateNote = (e) => {

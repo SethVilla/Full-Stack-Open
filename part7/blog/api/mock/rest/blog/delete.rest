@@ -1,0 +1,4 @@
+DELETE http://localhost:9000/api/blog/659aef1eb86e7b6aee26a781
+Accept: application/json
+
+

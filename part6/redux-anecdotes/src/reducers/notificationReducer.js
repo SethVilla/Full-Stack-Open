@@ -1,6 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {addVoteById} from "../services/anecdotes.js";
-import {vote} from "./anecdoteReducer.js";
 
 const initialState = {
     message: null,
