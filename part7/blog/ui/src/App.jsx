@@ -1,80 +1,76 @@
-import { useState, useEffect, useCallback } from 'react'
-import { Blog } from './components/Blog'
-import { getAll } from './services/blog'
-import { Login } from './components/login/Login.jsx'
-import { login } from './services/auth.js'
-import { AddBlog } from './components/forms/AddBlog.jsx'
-import { Notification } from './components/shared/Notification.jsx'
-import {useDispatch} from 'react-redux';
+import {useState, useEffect, useCallback} from 'react';
+import {Blog} from './components/Blog';
+import {Login} from './components/login/Login.jsx';
+import {login} from './services/auth.js';
+import {AddBlog} from './components/forms/AddBlog.jsx';
+import {Notification} from './components/shared/Notification.jsx';
+import {useDispatch, useSelector} from 'react-redux';
 import {startNotification} from './redux/reducers/notification.js';
+import {initializeBlogs, setBlogs} from './redux/reducers/blog.js';
+import {removeUser, setUser} from './redux/reducers/user.js';
+import {Outlet} from 'react-router-dom';
 
 const App = () => {
-  const dispatch = useDispatch()
-  const initLocalStorage = () => {
-    const userJson = window.localStorage.getItem('userDetails')
-    if (userJson) {
-      return JSON.parse(userJson)
-    }
-  }
-  const [user, setUser] = useState(() => initLocalStorage())
-  const [blogs, setBlogs] = useState([])
+  const dispatch = useDispatch();
+  const blogs = useSelector(state => state.blogs);
+  const user = useSelector(state => state.user);
 
-  const refreshBlogs = useCallback(
-    () => {
-      getAll(user?.token).then(blogs =>
-        setBlogs( blogs ? blogs : [] )
-      )
-    }, [user]
-  )
+  const refreshBlogs = useCallback(() => {
+    dispatch(initializeBlogs());
+  }, [user]);
 
   useEffect(() => {
     if (user) {
-      refreshBlogs()
+      refreshBlogs();
     }
-  }, [user, refreshBlogs])
+  }, [user, refreshBlogs]);
 
-  const onLogin = async (loginDetails) => {
-    const res = await login(loginDetails)
+  const onLogin = async loginDetails => {
+    const res = await login(loginDetails);
     if (res.success) {
-      window.localStorage.setItem('userDetails', JSON.stringify(res))
-      setUser(res)
+      window.localStorage.setItem('userDetails', JSON.stringify(res));
+      dispatch(setUser(res));
     } else {
-      dispatch(startNotification({
+      dispatch(
+        startNotification({
           notification: {
             type: 'error',
-            message: res.error
+            message: res.error,
           },
-          timer: 5000
-        }
-      ))
+          timer: 5000,
+        }),
+      );
     }
-  }
+  };
 
   const onLogout = () => {
-    window.localStorage.removeItem('userDetails')
-    setUser(null)
-    setBlogs([])
-  }
+    window.localStorage.removeItem('userDetails');
+    dispatch(removeUser());
+    dispatch(setBlogs([]));
+  };
 
   return (
     <div>
       <h1>Blogs</h1>
-      <Notification/>
-      {!user ? <Login onLogin={onLogin}/> :
-        <>
-          <p>{`${user.name} logged in`}</p>
-          <button onClick={onLogout}>logout</button>
+      <Notification />
+      <Outlet />
+      {/*{!user ? (*/}
+      {/*  <Login onLogin={onLogin} />*/}
+      {/*) : (*/}
+      {/*  <>*/}
+      {/*    <p>{`${user.name} logged in`}</p>*/}
+      {/*    <button onClick={onLogout}>logout</button>*/}
 
-          <AddBlog refreshBlogs={refreshBlogs}/>
+      {/*    <AddBlog />*/}
 
-          <h2>blogs</h2>
-          {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} refreshBlogs={refreshBlogs}/>
-          )}
-        </>
-      }
+      {/*    <h2>blogs</h2>*/}
+      {/*    {blogs.map(blog => (*/}
+      {/*      <Blog key={blog.id} blog={blog} />*/}
+      {/*    ))}*/}
+      {/*  </>*/}
+      {/*)}*/}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

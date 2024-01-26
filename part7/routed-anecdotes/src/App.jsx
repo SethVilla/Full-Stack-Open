@@ -8,7 +8,7 @@ import Notification from "./components/Notification.jsx";
 
 const App = () => {
 
-  const [notification, setNotification] = useState('')
+  // const [notification, setNotification] = useState('')
 
   // const anecdoteById = (id) =>
   //   anecdotes.find(a => a.id === id)

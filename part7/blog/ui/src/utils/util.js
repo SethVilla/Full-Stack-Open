@@ -1,7 +1,7 @@
 export const getToken = () => {
-  const userDetails = window.localStorage.getItem('userDetails')
+  const userDetails = window.localStorage.getItem('userDetails');
   if (userDetails) {
-    return JSON.parse(userDetails).token
+    return JSON.parse(userDetails).token;
   }
-  return null
-}
+  return null;
+};

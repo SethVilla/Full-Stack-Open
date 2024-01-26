@@ -1,8 +1,13 @@
 POST http://localhost:9000/api/auth/register
 Content-Type: application/json
 
+//{
+//  "username": "root",
+//  "name": "Superuser",
+//  "password": "salainen"
+//}
 {
-  "username": "root",
-  "name": "Superuser",
-  "password": "salainen"
+"username": "test",
+"name": "testUser",
+"password": "testUser"
 }
